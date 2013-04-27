@@ -183,6 +183,8 @@ var GAME = (function (width, height) {
 			for(i in s.hotspots){
 				var hs = s.hotspots[i];
 				var newDiv = GAME.hudManager.addHud('hotspot'+i, hs.bottom.x-hs.top.x, hs.bottom.y-hs.top.y, hs.top.x, hs.top.y, '');
+				hs.div = newDiv;
+
 				// Wrap value in closure
 				(function(hs){
 					newDiv.onmousedown = function(){ 
@@ -191,7 +193,7 @@ var GAME = (function (width, height) {
 						}
 					}
 				}(hs));
-				currentHotspots.push(newDiv);
+				currentHotspots.push(hs);
 			}
 		
 		}
@@ -233,17 +235,24 @@ var GAME = (function (width, height) {
 		that.setActive();
 	}
 
+
 	that.setActive = function(){
 		interactive = true;
 		for(hs in currentHotspots){
-			currentHotspots[hs].className = 'clickable';
+			currentHotspots[hs].div.className = 'clickable';
+			if(currentHotspots[hs].title){
+				currentHotspots[hs].div.title = currentHotspots[hs].title;
+			}
 		}
 	}
 
 	that.setInactive = function(){
 		interactive = false;
 		for(hs in currentHotspots){
-			currentHotspots[hs].className = '';
+			currentHotspots[hs].div.className = 'non-clickable';
+			if(currentHotspots[hs].div.title){
+				delete currentHotspots[hs].div.removeAttribute('title')
+			}
 		}
 	}
 

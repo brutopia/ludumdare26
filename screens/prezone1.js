@@ -5,22 +5,38 @@ GAME.addScreen('prezone1', (function(){
 			bridge: {	
 				start: {exit:1},
 				1: {line: 'This bridge is your only chance of getting into the Zone. It has been kept open for unofficial military transports.'},
-			}
+			},
+
+			city: {	
+				start: {exit:1},
+				1: {line: 'Most of Stockholm was shut down after the Visitation. It is no longer what it used to be.'},
+			},
+
+			water: {	
+				start: {exit:1},
+				1: {line: "The water in Stockholm was among the cleanest in the world. One could take a sip of it without becoming sick. Unfortunately it has become deadly poisonous (and slightly brownish). Don't drink it."},
+			},
 		}
 
 
 	that = {
 		title: 'Neo-Stockholm: The DMZ',
 		background: {img:'img/pre-zone1.png', scrollin:'left', title:'The Pre-Zone'},
-		sprites: undefined,
+		sprites: ['img/inna.png'],
 		hotspots: [
-			{top:{x:0,y:0}, bottom:{x:100,y:100}, callback: function(){
+			{top:{x:0,y:0}, bottom:{x:150,y:400}, title:'Exit to the Zone', callback: function(){
 				if(talkedToWife){
 					GAME.STATE.act=1; GAME.showScreen('act');
 				}
 			}},
 			{top:{x:500,y:60}, bottom:{x:900,y:260}, callback: function(){
 				GAME.showStory(descriptions.bridge)
+			}},
+			{top:{x:920,y:220}, bottom:{x:1024,y:270}, callback: function(){
+				GAME.showStory(descriptions.city)
+			}},
+			{top:{x:720,y:280}, bottom:{x:1024,y:380}, callback: function(){
+				GAME.showStory(descriptions.water)
 			}},
 		],
 	}
@@ -33,10 +49,38 @@ GAME.addScreen('prezone1', (function(){
 				};
 
 
+	var wifeLines = {	
+				start:  {line: 'Be careful out there.', exit:1},
+					1:  {line: 'Please...', exit:2},
+					2:  {line: 'come back alive.'},
+				};
 
 
 	that.init = function(){
-		GAME.showStory(storyLines, function(){console.log("Story finished")});
+		var wifeSprite = PIXI.Sprite.fromImage("img/inna.png");
+
+		wifeSprite.anchor.x = wifeSprite.anchor.y = 1.0;
+		wifeSprite.position.x = 990;
+		wifeSprite.position.y =  340;
+		
+		var optionsDiv = GAME.hudManager.addHud('hud-character', 600, 80, 70, 255 , 'options');
+		optionsDiv.style.display = 'none';
+		
+		var dialogueDiv = GAME.hudManager.addHud('hud-dialogue', 400,60, 270, 120 , 'dialogue');
+		dialogueDiv.style.display = 'none';
+
+		var dialogue = new Dialogue(wifeLines,dialogueDiv,optionsDiv)
+
+		GAME.showStory(storyLines, function(){
+			GAME.stage.addChild(wifeSprite);
+
+			GAME.setInactive();
+			dialogue.play(function(){
+				dialogueDiv.style.display='none'; 
+				GAME.stage.removeChild(wifeSprite);
+				GAME.setActive();
+			});
+		});
 	}
 
 	that.animate = function(){

@@ -61,7 +61,7 @@ function Dialogue(d, div, optsDiv){
 				}catch(e){
 					console.log(e);
 				}
-				calback = null;
+				callback = null;
 			}
 			INPUT.removeCallback('onmousedown', callbackId);
 		}
