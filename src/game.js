@@ -8,6 +8,7 @@ var GAME = (function (width, height) {
 	var scrolling;
 	var interactive = true;
 	var datGui;
+	var story, storyDiv;
 
 	that.stage = new PIXI.Stage(0x00ff00);
 	that.renderer = PIXI.autoDetectRenderer(width, height);
@@ -120,7 +121,7 @@ var GAME = (function (width, height) {
 					background.position.x = 0;
 				}
 				scrolling = true;
-				setInactive();
+				that.setInactive();
 			}
 			else{
 				background.anchor.x = 0.5;
@@ -148,7 +149,7 @@ var GAME = (function (width, height) {
 				}
 				else if(background.position.x >= GAME.renderer.width + 512){
 					scrolling = false;
-					setActive();
+					that.setActive();
 					if(s.title){
 						showTitle(s.title);
 					}
@@ -181,7 +182,7 @@ var GAME = (function (width, height) {
 				(function(hs){
 					newDiv.onmousedown = function(){ 
 						console.log(hs);
-						if(GAME.interactive){
+						if(interactive){
 							hs.callback();
 						}
 					}
@@ -196,11 +197,24 @@ var GAME = (function (width, height) {
 		}
 	}
 
-	function setActive(){
+	that.showStory = function(lines){
+		storyDiv = GAME.hudManager.addHud('hud-story', Math.floor(GAME.renderer.width*0.66), 80, 0, GAME.renderer.height - 160, 'story');
+		story = new Dialogue(lines,storyDiv,storyDiv);
+
+		that.setInactive();
+		story.play(storyFinished);
+	}
+
+	function storyFinished(){
+		GAME.hudManager.removeHud('hud-story');
+		that.setActive();
+	}
+
+	that.setActive = function(){
 		interactive = true;
 	}
 
-	function setInactive(){
+	that.setInactive = function(){
 		interactive = false;
 	}
 

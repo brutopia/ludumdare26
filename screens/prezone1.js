@@ -1,6 +1,11 @@
 GAME.addScreen('prezone1', (function(){
-	
-	var story, storyDiv;
+	var descriptions = {
+			bridge: {	
+				start: {exit:1},
+				1: {line: 'This bridge is your only chance of getting into the Zone. It has been kept open for unofficial military transports.'},
+			}
+		}
+
 
 	that = {
 		title: 'Neo-Stockholm: The DMZ',
@@ -8,7 +13,9 @@ GAME.addScreen('prezone1', (function(){
 		sprites: ['img/pre-zone1.png'],
 		hotspots: [
 			{top:{x:0,y:0}, bottom:{x:100,y:100}, callback: function(){GAME.STATE.act=1; GAME.showScreen('act');} },
-			{top:{x:400,y:200}, bottom:{x:800,y:400}, callback: function(){GAME.STATE.act=1; GAME.showScreen('act');} },
+			{top:{x:500,y:60}, bottom:{x:900,y:260}, callback: function(){
+				GAME.showStory(descriptions.bridge)}
+			},
 		],
 	}
 
@@ -16,18 +23,15 @@ GAME.addScreen('prezone1', (function(){
 	var storyLines = {	
 				start:  {line: 'The pre-zone. Your palms are sweaty and your heart is racing. But you need the money.', exit:1},
 					1:  {line: 'Laid out in front of you is the only way into the Zone: the freightway. Since the incident, all other passages have either been permanently blocked or are heavily guarded by armed military personnel.', exit:2},
-					2:  {line: 'Your wife is here to say farewell. This might very well be the very last time you ever see her.', exit:'end'},
-				end:{pre:function(){storyDiv.style.display = 'none'; story.stop();}}
-			};
+					2:  {line: 'Your wife is here to say farewell. This might very well be the very last time you ever see her.'},
+				};
+
 
 
 
 	that.init = function(){
-		setTimeout(function(){
-			storyDiv = GAME.hudManager.addHud('hud-story', Math.floor(GAME.renderer.width*0.66), 80, 0, GAME.renderer.height - 160, 'story');
-			story = new Dialogue(storyLines, storyDiv, storyDiv);
-			story.play();
-		}, 12000);
+		console.log("Printing some story");
+		GAME.showStory(storyLines);
 	},
 
 	that.animate = function(){

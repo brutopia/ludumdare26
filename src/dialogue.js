@@ -1,22 +1,20 @@
 function Dialogue(d, div, optsDiv){
 	that = {};
 	
-	var textDelay = 10000;
-	var timeout;
 	var current;
 	var waiting = false;
+	var callback;
 
-	var callbackId = INPUT.addCallback('onmousedown', mousePressed);
+	var callbackId;
 	function mousePressed(e){
-		window.clearTimeout(timeout);
 		if(waiting===true){
+			console.log("Dialogue mouse pressed");
 			waiting = false;
 			forward();
 		}
 	}
 
 	function forward(){
-		window.clearTimeout(timeout);
 		waiting = false;
 
 		div.style.display = "block";
@@ -49,14 +47,25 @@ function Dialogue(d, div, optsDiv){
 				if(current.exit){
 					current = d[current.exit];
 					waiting = true;
-					//timeout = setTimeout(forward, textDelay);
 				}
 				else{
-					INPUT.removeCallback('onmousedown', mousePressed);
+					// We're on the last line
 					current = undefined;
+					waiting = true;
 				}
 			}
 
+		}else{
+			if(callback){
+				try{
+					callback();
+					console.log("Calling back ");
+				}catch(e){
+					console.log(e);
+				}
+				calback = null;
+			}
+			INPUT.removeCallback('onmousedown', callbackId);
 		}
 	}
 
@@ -109,16 +118,12 @@ function Dialogue(d, div, optsDiv){
 		forward();
 	}
 
-	that.play = function(){
-		GAME.interactive = false;
+	that.play = function(c){
+		callbackId = INPUT.addCallback('onmousedown', mousePressed);
+		callback= c;
 		current = d.start;
 		waiting = false;
 		forward();
-	}
-
-	that.stop = function(){
-		GAME.interactive = true;
-		INPUT.removeCallback('onmousedown', callbackId);
 	}
 
 	return that;
