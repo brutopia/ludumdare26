@@ -6,7 +6,7 @@ var GAME = (function (width, height) {
 	var mouseCallback;
 	var background;
 	var scrolling;
-
+	var interactive = true;
 	var datGui;
 
 	that.stage = new PIXI.Stage(0x00ff00);
@@ -14,7 +14,7 @@ var GAME = (function (width, height) {
 	that.debug = false;
 	that.hudManager;
 	that.STATE = {act:1,};
-	that.interactive = true;
+	
 
 	function initDebug(s){
 		if(!datGui){
@@ -90,6 +90,8 @@ var GAME = (function (width, height) {
 			that.stage.removeChild(that.stage.children[i]);
 		}
 
+		that.hudManager.clear();
+
 		if(currentScreen && that.screens[currentScreen].exit){
 			try{
 				that.screens[currentScreen].exit();
@@ -118,6 +120,7 @@ var GAME = (function (width, height) {
 					background.position.x = 0;
 				}
 				scrolling = true;
+				setInactive();
 			}
 			else{
 				background.anchor.x = 0.5;
@@ -145,6 +148,7 @@ var GAME = (function (width, height) {
 				}
 				else if(background.position.x >= GAME.renderer.width + 512){
 					scrolling = false;
+					setActive();
 					if(s.title){
 						showTitle(s.title);
 					}
@@ -170,35 +174,34 @@ var GAME = (function (width, height) {
 		}
 
 		if(s.hotspots){
-				console.log("Adding mouse callback");
-				mouseCallback = INPUT.addCallback('onmousedown', function (e){
-
-					if(GAME.interactive){
-						var boundingRect = GAME.renderer.view.getBoundingClientRect();
-						var relativeCoordinates = {x: (e.pageX - boundingRect.left), y: (e.pageY-boundingRect.top)};
-						
-						for(i in s.hotspots){
-
-							var hs = s.hotspots[i];
-							if(relativeCoordinates.x >= hs.top.x && relativeCoordinates.y >= hs.top.y && relativeCoordinates.x <= hs.bottom.x && relativeCoordinates.y <= hs.bottom.y){
-								try{
-									hs.callback();
-								}
-								catch(e){
-									console.log("Failed hotspot callback with error " + e);
-								}
-
-								break; // Found a hotspot, so don't continue looking
-							}
+			for(i in s.hotspots){
+				var hs = s.hotspots[i];
+				var newDiv = GAME.hudManager.addHud('hotspot'+i, hs.bottom.x-hs.top.x, hs.bottom.y-hs.top.y, hs.top.x, hs.top.y, 'hotspot');
+				// Wrap value in closure
+				(function(hs){
+					newDiv.onmousedown = function(){ 
+						console.log(hs);
+						if(GAME.interactive){
+							hs.callback();
 						}
 					}
-				});
+				}(hs));
+			}
+		
 		}
 
 	
 		if(GAME.debug){
 			initDebug(s);
 		}
+	}
+
+	function setActive(){
+		interactive = true;
+	}
+
+	function setInactive(){
+		interactive = false;
 	}
 
 	function showTitle(title){

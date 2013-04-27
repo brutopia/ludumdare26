@@ -17,20 +17,20 @@ GAME.addScreen('act', (function(){
 		switch(GAME.STATE.act){
 			case 3:
 				h = "Act III";
-				t = "The Violation";
+				t = "The Husband";
 				next = 'screen2';
 			break;
 
 			case 2:
 				h = "Act II";
-				t = "The Descent";
+				t = "The Father";
 				next = 'screen2';
 			break;
 
 			default:
 				h = "Act I";
-				t = "Stalker";
-				next = 'prezone1';
+				t = "The Stalker";
+				next = 'prezone2';
 			break;
 		}
 		

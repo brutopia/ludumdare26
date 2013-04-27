@@ -39,5 +39,9 @@ function HUD(rootElement){
 		return (hud=document.getElementById(id)).parentNode.removeChild(hud);
 	}
 
+	that.clear = function(){
+		rootElement.innerHTML = '';
+	}
+
 	return that;
 }
