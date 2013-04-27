@@ -76,7 +76,7 @@ var GAME = (function (width, height) {
 		var manifest = [];
 		for(s in that.screens){
 			if(that.screens[s].background){
-				manifest.push(that.screens[s].background);
+				manifest.push(that.screens[s].background.img);
 			}
 			if(that.screens[s].sprites){
 				manifest = manifest.concat(that.screens[s].sprites);

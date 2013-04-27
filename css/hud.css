@@ -1,6 +1,7 @@
 #hud{
 	font-family: "tahoma", "arial";
 	z-index: 10;
+	text-align: left;
 }
 
 .loading {
@@ -102,6 +103,5 @@
 .hotspot{
 	border-color: #f00;
 	border-width: 1px;
-	border-style: solid;
 	cursor: pointer;
 }

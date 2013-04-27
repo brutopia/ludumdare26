@@ -8,7 +8,11 @@
 			margin: 0;
 			padding: 0;
 			background-color: #000000;
-			color: #000;
+			color: #333;
+			text-align: center;
+		}
+		a{
+			color: #444;	
 		}
 		#game {
         	position: relative;
@@ -58,11 +62,12 @@
 	<script src="src/hud.js"></script>
 	<script src="src/input.js"></script>
 	<script src="src/requestAnimationFramePolyfill.js"></script>
-
+	<!--<script src="game.min.js"></script>-->
 
 	<script src="intro.js"></script>
 	<script src="screens/actchange.js"></script>
 	<script src="screens/prezone1.js"></script>
+	<!--<script src="screens.min.js"></script>-->
 
 
 	<!--[if lt IE 8 ]>
@@ -76,7 +81,7 @@
 
 		window.onload = function(){
 			GAME.init();
-			GAME.debug = true;
+			//GAME.debug = true;
 
 			LOADING.load();
 
@@ -93,6 +98,9 @@
         </div>
         <progress id='progress-bar' max='100' value="0" class="hidden"></progress>
 	</div>
+
+	Game made for <a href="http://www.ludumdare.com/compo/">Ludum Dare 26</a> <br/>
+	Interaction: Click
 
 
 </body>
