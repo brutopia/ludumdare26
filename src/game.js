@@ -203,6 +203,7 @@ var GAME = (function (width, height) {
 
 	function showTitle(title){
 		titleDiv = GAME.hudManager.addHud('hud-title', 170, 20, 0, 30, 'img-title');
+		titleDiv.style.width = 'auto';
 		titleDiv.innerText = titleDiv.textContent = title;
 		setTimeout(function(){titleDiv.style.display = "none";}, 8000);
 	}
