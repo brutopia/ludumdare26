@@ -15,6 +15,8 @@ GAME.addScreen('act', (function(){
 
 		var h,t,next, sound;
 		switch(GAME.STATE.act){
+
+
 			case 3:
 				h = "Act III";
 				t = "The Husband";
@@ -25,6 +27,12 @@ GAME.addScreen('act', (function(){
 				h = "Act II";
 				t = "The Father";
 				next = 'screen2';
+			break;
+
+			case 0:
+				h = "Prelude";
+				t = "Enter the Zone";
+				next = 'prezone1';
 			break;
 
 			default:
@@ -55,17 +63,17 @@ GAME.addScreen('act', (function(){
 		heading.textContent = heading.innerText = h;
 		title.textContent = title.innerText = t;
 
-		mousePressed = INPUT.addCallback('onmousedown', function (){
-			INPUT.removeCallback('onmousedown', mousePressed);
-			GAME.showScreen(next);
-		});
+		setTimeout(function(){
+			mousePressed = INPUT.addCallback('onmousedown', function (){
+				INPUT.removeCallback('onmousedown', mousePressed);
+				GAME.showScreen(next);
+			});}, 3000);
 
 	},
 
 
 	that.exit = function(){
-		GAME.hudManager.removeHud('hud-act');
-		GAME.hudManager.removeHud('hud-actTitle');
+		// Huds cleaned up by game object
 	}
 
 	return that;

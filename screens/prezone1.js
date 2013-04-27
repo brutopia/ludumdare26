@@ -1,4 +1,6 @@
 GAME.addScreen('prezone1', (function(){
+	var talkedToWife = false;
+
 	var descriptions = {
 			bridge: {	
 				start: {exit:1},
@@ -12,10 +14,14 @@ GAME.addScreen('prezone1', (function(){
 		background: {img:'img/pre-zone1.png', scrollin:'left', title:'The Pre-Zone'},
 		sprites: undefined,
 		hotspots: [
-			{top:{x:0,y:0}, bottom:{x:100,y:100}, callback: function(){GAME.STATE.act=1; GAME.showScreen('act');} },
+			{top:{x:0,y:0}, bottom:{x:100,y:100}, callback: function(){
+				if(talkedToWife){
+					GAME.STATE.act=1; GAME.showScreen('act');
+				}
+			}},
 			{top:{x:500,y:60}, bottom:{x:900,y:260}, callback: function(){
-				GAME.showStory(descriptions.bridge)}
-			},
+				GAME.showStory(descriptions.bridge)
+			}},
 		],
 	}
 
@@ -30,9 +36,8 @@ GAME.addScreen('prezone1', (function(){
 
 
 	that.init = function(){
-		console.log("Printing some story");
-		GAME.showStory(storyLines);
-	},
+		GAME.showStory(storyLines, function(){console.log("Story finished")});
+	}
 
 	that.animate = function(){
 

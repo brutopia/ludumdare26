@@ -58,7 +58,7 @@ LOADING = (function(){
 				hudManager.removeHud('hud-loading');
 				progress_bar.style.display = "none";
 				GAME.stage.setBackgroundColor(0x000000);
-				GAME.showScreen('prezone1');
+				GAME.showScreen('act');
 			}, 3000 );
 		}
 

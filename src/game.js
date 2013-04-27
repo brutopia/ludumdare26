@@ -8,13 +8,14 @@ var GAME = (function (width, height) {
 	var scrolling;
 	var interactive = true;
 	var datGui;
-	var story, storyDiv;
+	var story, storyDiv, rootHudDiv;
+	var currentHotspots;
 
 	that.stage = new PIXI.Stage(0x00ff00);
 	that.renderer = PIXI.autoDetectRenderer(width, height);
 	that.debug = false;
 	that.hudManager;
-	that.STATE = {act:1,};
+	that.STATE = {act:0,};
 	
 
 	function initDebug(s){
@@ -28,7 +29,8 @@ var GAME = (function (width, height) {
 	}
 
 	that.init = function () {
-		that.hudManager = new HUD(document.getElementById('hud'));
+		rootHudDiv = document.getElementById('hud');
+		that.hudManager = new HUD(rootHudDiv);
 
 		// Restore saved game state
 		that.load();
@@ -126,34 +128,41 @@ var GAME = (function (width, height) {
 			else{
 				background.anchor.x = 0.5;
 				background.position.x = GAME.renderer.width/2.0;
+				
 			}
 		
 			background.anchor.y = 0.5;
 			background.position.y =  GAME.renderer.height/2.0;
 			GAME.stage.addChild(background);
+			
+		}
+
+		// Ready to initialize screen... unless the background is scrolling in
+		if(!scrolling){
+			screenReady(s);
 		}
 
 		// Reset animation loop
 		cancelAnimationFrame(animationRequest);
 
-
+		var lastTime;
 		// Main loop
 		(function animate(timestamp) {
+			var timeDelta = timestamp-lastTime;
 			// Scroll background
 			if(scrolling){
-				var scrollinTime = 10000;
+				var scrollinTime = 7000;
 
 				// Only left scrollins for now
-				if(s.background.scrollin === 'left' && background.position.x < GAME.renderer.width + 512 && timestamp){
-					background.position.x = GAME.renderer.width + (timestamp/scrollinTime * 512);
+				if(s.background.scrollin === 'left' && background.position.x < GAME.renderer.width + 512 && timestamp && timeDelta){
+					background.position.x += (timeDelta/scrollinTime * 512);
 				}
 				else if(background.position.x >= GAME.renderer.width + 512){
 					scrolling = false;
 					that.setActive();
-					if(s.title){
-						showTitle(s.title);
-					}
+					screenReady(s);
 				}
+				lastTime = timestamp;
 			}
 
 			// Call the scene animation
@@ -165,28 +174,24 @@ var GAME = (function (width, height) {
 			GAME.renderer.render(GAME.stage);
 		})();
 
-
-		if(s.init){
-			s.init();
-		}
-
 		if(mouseCallback){
 			mouseCallback = INPUT.removeCallback('onmousedown', mouseCallback);
 		}
 
+		currentHotspots = [];
 		if(s.hotspots){
 			for(i in s.hotspots){
 				var hs = s.hotspots[i];
-				var newDiv = GAME.hudManager.addHud('hotspot'+i, hs.bottom.x-hs.top.x, hs.bottom.y-hs.top.y, hs.top.x, hs.top.y, 'hotspot');
+				var newDiv = GAME.hudManager.addHud('hotspot'+i, hs.bottom.x-hs.top.x, hs.bottom.y-hs.top.y, hs.top.x, hs.top.y, '');
 				// Wrap value in closure
 				(function(hs){
 					newDiv.onmousedown = function(){ 
-						console.log(hs);
 						if(interactive){
 							hs.callback();
 						}
 					}
 				}(hs));
+				currentHotspots.push(newDiv);
 			}
 		
 		}
@@ -197,12 +202,30 @@ var GAME = (function (width, height) {
 		}
 	}
 
-	that.showStory = function(lines){
+	function screenReady(s){
+		if(s.title){
+			showTitle(s.title);
+		}
+		if(s.init){
+			s.init();
+		}
+	}
+
+	that.showStory = function(lines, callback){
 		storyDiv = GAME.hudManager.addHud('hud-story', Math.floor(GAME.renderer.width*0.66), 80, 0, GAME.renderer.height - 160, 'story');
 		story = new Dialogue(lines,storyDiv,storyDiv);
 
 		that.setInactive();
-		story.play(storyFinished);
+		story.play(function(){
+			storyFinished();
+			if(callback){
+				try{
+					callback();
+				}catch(e){
+					console.log(e);
+				}
+			}
+		});
 	}
 
 	function storyFinished(){
@@ -212,17 +235,23 @@ var GAME = (function (width, height) {
 
 	that.setActive = function(){
 		interactive = true;
+		for(hs in currentHotspots){
+			currentHotspots[hs].className = 'clickable';
+		}
 	}
 
 	that.setInactive = function(){
 		interactive = false;
+		for(hs in currentHotspots){
+			currentHotspots[hs].className = '';
+		}
 	}
 
 	function showTitle(title){
 		titleDiv = GAME.hudManager.addHud('hud-title', 170, 20, 0, 30, 'img-title');
 		titleDiv.style.width = 'auto';
 		titleDiv.innerText = titleDiv.textContent = title;
-		setTimeout(function(){titleDiv.style.display = "none";}, 8000);
+		setTimeout(function(){titleDiv.style.display = "none";}, 5000);
 	}
 
 	return that;

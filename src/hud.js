@@ -16,7 +16,7 @@ function HUD(rootElement){
 	
 
 	that.addHud = function(id, width, height, x, y, cssClass){
-		if(!id || !width || !height || !cssClass || x === undefined || y === undefined){
+		if(!id || !width || !height || x === undefined || y === undefined){
 			throw "Missing arguments";
 		}
 

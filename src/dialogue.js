@@ -8,7 +8,6 @@ function Dialogue(d, div, optsDiv){
 	var callbackId;
 	function mousePressed(e){
 		if(waiting===true){
-			console.log("Dialogue mouse pressed");
 			waiting = false;
 			forward();
 		}
@@ -59,7 +58,6 @@ function Dialogue(d, div, optsDiv){
 			if(callback){
 				try{
 					callback();
-					console.log("Calling back ");
 				}catch(e){
 					console.log(e);
 				}

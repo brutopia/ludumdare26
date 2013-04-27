@@ -13,6 +13,9 @@
 
 .clickable{
 	cursor: pointer;
+	border-style:solid;
+	border-width:1px;
+	border-color:#f00;
 }
 
 canvas{
