@@ -1,0 +1,30 @@
+progress, progress[role][aria-valuenow]{
+			border: solid #000 1px;
+			border-radius: 5px;
+			background-color: #333333 !important;
+		}
+		progress::-webkit-progress-bar {
+		    background: #333333;
+		}
+		/* IE10 */
+		progress {
+		    color:  #ffc800;
+		}
+
+		/* Firefox */
+		progress::-moz-progress-bar { 
+			border-radius: 5px;
+		    background:  #ffc800;	
+		}
+
+		/* Chrome */
+		progress::-webkit-progress-value {
+			border-radius: 5px;
+		    background:  #ffc800;
+		}
+
+		/* Polyfill */
+		progress[aria-valuenow]:before  {
+			border-radius: 5px;
+		    background:  #ffc800;
+		}

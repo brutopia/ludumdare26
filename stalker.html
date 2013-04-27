@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Stalker</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			background-color: #000000;
+			color: #000;
+		}
+		#game {
+        	position: relative;
+        	padding:0px;
+        	top:20px;
+        	width:1024px;
+        	height:480px;
+        	margin-left: auto ;
+        	margin-right: auto ;
+
+        	-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+	  	}
+
+		#progress-bar{
+			position: absolute;
+	        top: 66%;
+	        left: 412px;
+	        width:200px;
+	        height:10px;
+
+		}
+		.hidden{
+			display:none;
+		}
+	</style>
+
+
+	<link rel="stylesheet" type="text/css" href="css/progressbar.css">
+	<link rel="stylesheet" type="text/css" href="css/hud.css">
+	<link rel="stylesheet" type="text/css" href="css/game.css">
+
+	<script src="lib/pixi.js"></script>
+	<script src="lib/mousetrap.min.js"></script>
+	<script src="lib/preloadjs-0.3.0.min.js"></script>
+	<script src="lib/howler.min.js"></script>
+	
+	<!-- Only for debugging -->
+	<script src="lib/dat.gui.js"></script>
+
+	<script src="src/dialogue.js"></script>
+	<script src="src/game.js"></script>
+	<script src="src/hud.js"></script>
+	<script src="src/input.js"></script>
+	<script src="src/requestAnimationFramePolyfill.js"></script>
+
+
+	<script src="intro.js"></script>
+	<script src="screens/actchange.js"></script>
+	<script src="screens/prezone1.js"></script>
+
+
+	<!--[if lt IE 8 ]>
+	    <script type='text/javascript'>
+	        alert( 'Unfortunately your current browser is not supported. Please try in Internet Explorer 9 or any new version of Chrome or Firefox' );
+	    </script>
+	<![endif]-->
+
+	<script>
+		//window.onbeforeunload = function (){return 'Beware that all progress in the current act might be lost if you leave or reload this page'};
+
+		window.onload = function(){
+			GAME.init();
+			GAME.debug = true;
+
+			LOADING.load();
+
+			// Append canvas to page
+			document.getElementById('game').appendChild(GAME.renderer.view);
+		};
+	</script>
+
+</head>
+<body>
+
+	<div id="game">
+		<div id="hud" style="position:relative;">
+        </div>
+        <progress id='progress-bar' max='100' value="0" class="hidden"></progress>
+	</div>
+
+
+</body>
+</html>

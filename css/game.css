@@ -1,0 +1,20 @@
+#game{
+	cursor: default;
+}
+
+.line{
+	cursor: pointer;
+	z-index: 20;
+}
+
+.line:hover{
+	color:rgba(255,100,0,1.0);
+}
+
+.clickable{
+	cursor: pointer;
+}
+
+canvas{
+
+}

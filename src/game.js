@@ -4,6 +4,10 @@ var GAME = (function (width, height) {
 	var currentScreen;
 	var animationRequest;
 	var mouseCallback;
+	var background;
+	var scrolling;
+
+	var datGui;
 
 	that.stage = new PIXI.Stage(0x00ff00);
 	that.renderer = PIXI.autoDetectRenderer(width, height);
@@ -11,6 +15,16 @@ var GAME = (function (width, height) {
 	that.hudManager;
 	that.STATE = {act:1,};
 	that.interactive = true;
+
+	function initDebug(s){
+		if(!datGui){
+			datGui = new dat.GUI();
+		}
+		if(background){
+	  		datGui.add(background.position, 'x');
+	  		datGui.add(background.position, 'y');
+  		}
+	}
 
 	that.init = function () {
 		that.hudManager = new HUD(document.getElementById('hud'));
@@ -79,22 +93,38 @@ var GAME = (function (width, height) {
 		if(currentScreen && that.screens[currentScreen].exit){
 			try{
 				that.screens[currentScreen].exit();
+				background = null;
 			}
 			catch(e){
 				console.log("Failed to exit screen gracefully " + e);
 			}
 		}
 
-
 		currentScreen = futureScreen;
 		var s = that.screens[currentScreen];
 
-
 		// Draw background
-		if(s.background){
-			var background = PIXI.Sprite.fromImage(s.background);
-			background.anchor.x = background.anchor.y = 0.5;
-			background.position.x = GAME.renderer.width/2.0;
+		if(s.background && s.background.img){
+			background = PIXI.Sprite.fromImage(s.background.img);
+			
+			// Should the scene come scrolling in?
+			if(s.background.scrollin){
+				if(s.background.scrollin === 'left'){
+					background.anchor.x = 1;
+					background.position.x = GAME.renderer.width;
+				}
+				else{
+					background.anchor.x = 0;
+					background.position.x = 0;
+				}
+				scrolling = true;
+			}
+			else{
+				background.anchor.x = 0.5;
+				background.position.x = GAME.renderer.width/2.0;
+			}
+		
+			background.anchor.y = 0.5;
 			background.position.y =  GAME.renderer.height/2.0;
 			GAME.stage.addChild(background);
 		}
@@ -102,9 +132,24 @@ var GAME = (function (width, height) {
 		// Reset animation loop
 		cancelAnimationFrame(animationRequest);
 
+
 		// Main loop
-		(function animate() {
-			if(GAME.debug){STATS.end(); STATS.begin();}
+		(function animate(timestamp) {
+			// Scroll background
+			if(scrolling){
+				var scrollinTime = 10000;
+
+				// Only left scrollins for now
+				if(s.background.scrollin === 'left' && background.position.x < GAME.renderer.width + 512 && timestamp){
+					background.position.x = GAME.renderer.width + (timestamp/scrollinTime * 512);
+				}
+				else if(background.position.x >= GAME.renderer.width + 512){
+					scrolling = false;
+					if(s.title){
+						showTitle(s.title);
+					}
+				}
+			}
 
 			// Call the scene animation
 			if(s.animate){
@@ -150,6 +195,16 @@ var GAME = (function (width, height) {
 				});
 		}
 
+	
+		if(GAME.debug){
+			initDebug(s);
+		}
+	}
+
+	function showTitle(title){
+		titleDiv = GAME.hudManager.addHud('hud-title', 170, 20, 0, 30, 'img-title');
+		titleDiv.innerText = titleDiv.textContent = title;
+		setTimeout(function(){titleDiv.style.display = "none";}, 8000);
 	}
 
 	return that;
