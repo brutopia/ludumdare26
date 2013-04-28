@@ -227,11 +227,13 @@ var GAME = (function (width, height) {
 
 		story = new Dialogue(lines,dialogueDiv,characterDiv);
 
-		charSprite = PIXI.Sprite.fromImage(characterImage);
-		charSprite.anchor.x = charSprite.anchor.y = 1.0;
-		charSprite.position.x = 990;
-		charSprite.position.y =  340;
-		GAME.stage.addChild(charSprite);
+		if(characterImage){
+			charSprite = PIXI.Sprite.fromImage(characterImage);
+			charSprite.anchor.x = charSprite.anchor.y = 1.0;
+			charSprite.position.x = 990;
+			charSprite.position.y =  340;
+			GAME.stage.addChild(charSprite);
+		}
 
 		that.setInactive();
 		story.play(function(){
@@ -247,8 +249,9 @@ var GAME = (function (width, height) {
 	}
 
 	function dialogueFinished(){
-		console.log("dialogue finished");
-		GAME.stage.removeChild(charSprite);
+		if(charSprite){
+			GAME.stage.removeChild(charSprite);
+		}
 		charSprite = null;
 		GAME.hudManager.removeHud('hud-character');
 		GAME.hudManager.removeHud('hud-dialogue');

@@ -45,7 +45,6 @@ GAME.addScreen('act', (function(){
 		}
 		
 		if(sound){
-			console.log("Sound!");
 			if(soundtrack){
 				console.log(soundtrack);
 				soundtrack.fadeOut(0, 300, startSoundtrack);
