@@ -10,6 +10,11 @@ GAME.addScreen('zone1', (function(){
 				1: {line: "Whoever was left in the city after the Visitation is surely not alive any longer.",},
 			},
 
+			water: {	
+				start: {exit:1},
+				1: {line: "The water is fizzing. It is partly Witch's Jelly. If one were to take a bath, instant loss of limbs would be to expect.",},
+			},
+
 			exit: {	
 				start: {exit:1},
 				1: {line: "This way leads to the heavily guarderd walls surrounding the Zone.",},
@@ -38,6 +43,10 @@ GAME.addScreen('zone1', (function(){
 
 			{top:{x:0,y:160}, bottom:{x:170,y:220}, callback: function(){
 				GAME.showStory(descriptions.city);
+			}},
+
+			{top:{x:0,y:230}, bottom:{x:200,y:320}, callback: function(){
+				GAME.showStory(descriptions.water);
 			}},
 		],
 	}

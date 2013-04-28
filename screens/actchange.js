@@ -16,17 +16,10 @@ GAME.addScreen('act', (function(){
 		var h,t,next, sound;
 		switch(GAME.STATE.act){
 
-
-			case 3:
-				h = "Act III";
-				t = "The Husband";
-				next = 'screen2';
-			break;
-
 			case 2:
-				h = "Act II";
-				t = "The Father";
-				next = 'screen2';
+				h = "";
+				t = "Fin";
+				next = '';
 			break;
 
 			case 1:
@@ -63,12 +56,14 @@ GAME.addScreen('act', (function(){
 
 		heading.textContent = heading.innerText = h;
 		title.textContent = title.innerText = t;
+		if(next){
+			setTimeout(function(){
 
-		setTimeout(function(){
-			mousePressed = INPUT.addCallback('onmousedown', function (){
-				INPUT.removeCallback('onmousedown', mousePressed);
-				GAME.showScreen(next);
-			});}, 3000);
+				mousePressed = INPUT.addCallback('onmousedown', function (){
+					INPUT.removeCallback('onmousedown', mousePressed);
+					GAME.showScreen(next);
+				});}, 3000);
+		}
 
 	},
 

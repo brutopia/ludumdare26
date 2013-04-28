@@ -305,10 +305,10 @@ var GAME = (function (width, height) {
 	}
 
 	function showTitle(title){
-		titleDiv = GAME.hudManager.addHud('hud-title', 170, 20, 0, 30, 'img-title');
-		titleDiv.style.width = 'auto';
+		titleDiv = GAME.hudManager.addHud('hud-title', 1024, 20, 0, 10, 'img-title');
+		titleDiv.style.width = '100%';
 		titleDiv.innerText = titleDiv.textContent = title;
-		setTimeout(function(){titleDiv.style.display = "none";}, 5000);
+		setTimeout(function(){titleDiv.style.display = "none";}, 3500);
 	}
 
 	return that;

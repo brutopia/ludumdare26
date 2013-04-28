@@ -26,8 +26,7 @@ GAME.addScreen('prezone1', (function(){
 
 
 	that = {
-		title: 'Neo-Stockholm: The DMZ',
-		background: {img:'img/pre-zone1.png', scrollin:'left', title:'The Pre-Zone'},
+		background: {img:'img/pre-zone1.png', scrollin:'left', },
 		sprites: ['img/wife.png'],
 		hotspots: [
 			{top:{x:0,y:0}, bottom:{x:150,y:400}, title:'Exit to the Zone', callback: function(){
