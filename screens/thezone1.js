@@ -19,6 +19,11 @@ GAME.addScreen('zone1', (function(){
 				start: {exit:1},
 				1: {line: "This way leads to the heavily guarderd walls surrounding the Zone.",},
 			},
+
+			notReady: {	
+				start: {exit:1},
+				1: {line: "There is a pathway down to the water, but you really should try to get into that military complex first.",},
+			},
 		}
 
 
@@ -46,6 +51,15 @@ GAME.addScreen('zone1', (function(){
 
 			{top:{x:0,y:230}, bottom:{x:200,y:320}, callback: function(){
 				GAME.showStory(descriptions.water);
+			}},
+
+			{top:{x:250,y:150}, bottom:{x:350,y:330}, title:'Exit to water', callback: function(){
+				if(GAME.PLAYER.hasReadLetter){
+					GAME.showScreen('zone5');
+				}
+				else{
+					GAME.showStory(descriptions.notReady);
+				}
 			}},
 		],
 	}

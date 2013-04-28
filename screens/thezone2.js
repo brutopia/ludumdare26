@@ -78,7 +78,7 @@ GAME.addScreen('zone2', (function(){
 	var dialogueLines = {	
 							start: {exit:1},
 							1: {line: "Halt you scumbag or I will instantly gun you down.", exit:2, div: 'hud-dialogue'},
-							2: {line: "Don't think you can come waltzing in here uninvited...", exit:3, div: 'hud-dialogue'},
+							2: {line: "Did you press that button? Don't think you can come waltzing in here uninvited...", exit:3, div: 'hud-dialogue'},
 							3: {line: "... unless you come with gifts, old pal!",  div: 'hud-dialogue'},
 							
 
@@ -123,8 +123,8 @@ GAME.addScreen('zone2', (function(){
 								3318: {line: "would of course share half of whatever price he got for the valuable artefact.", exit:3319, div: 'hud-dialogue'},
 								3319: {line: "Do we understand each other?", options:[3320,3321], div: 'hud-dialogue'},
 									3320: {line: "Yes", exit:33201, div: 'hud-character'},
-										33201: {line: "Good then. You may enter.", exit:33202, div: 'hud-dialogue', pre: function(){GAME.PLAYER.dealWithAndrei=true;}},
-										33201: {pre:function(){GAME.STATE.act=2; GAME.showScreen('act');}},
+										33201: {line: "Good then. You may enter...", exit:33202, div: 'hud-dialogue', pre: function(){GAME.PLAYER.dealWithAndrei=true;}},
+										33202: {line: "As soon as you have payed me 5000 credits upfront."},
 									3321: {line: "No", exit:231, div: 'hud-character'},
 
 								332: {line: "No", exit:231, div: 'hud-character'},

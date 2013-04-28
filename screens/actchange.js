@@ -38,7 +38,7 @@ GAME.addScreen('act', (function(){
 			case 1:
 				h = "Entering the Zone";
 				t = "The Stalker";
-				next = 'zone5';
+				next = 'zone1';
 				sound = ['sound/ambient.mp3','sound/ambient.ogg',];
 			break;
 
