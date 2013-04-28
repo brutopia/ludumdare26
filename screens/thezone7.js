@@ -20,7 +20,7 @@ GAME.addScreen('zone7', (function(){
 				3:  {line: "Mika is dead.", exit:4},
 				4:  {line: "At the end of these steps you will find what makes it all worth it.", exit:5},
 				5:  {pre:function(){
-					setTimeout( function(){GAME.STATE.act=3; GAME.showScreen('act');}, 5000);
+					setTimeout( function(){GAME.showScreen('house');}, 5000);
 				}},
 				};
 

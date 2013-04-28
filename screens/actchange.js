@@ -18,26 +18,21 @@ GAME.addScreen('act', (function(){
 
 	that.init = function(){
 		GAME.stage.setBackgroundColor(0x101010);
-		heading = GAME.hudManager.addHud('hud-act', GAME.renderer.width-30, 30, 0, 100, 'act');
 		title = GAME.hudManager.addHud('hud-actTitle', GAME.renderer.width-30, 125, 0, 130, 'title');
+		heading = GAME.hudManager.addHud('hud-act', GAME.renderer.width-30, 30, 0, 100, 'act');
 
 		
 		switch(GAME.STATE.act){
 
-			case 3:
+			case 2:
 				h = "";
 				t = "Fin";
 				next = '';
 			break;
-			case 2:
-				h = "Act II";
-				t = "The Zone";
-				next = 'zone7';
-			break;
 
 			case 1:
-				h = "Entering the Zone";
-				t = "The Stalker";
+				h = "";
+				t = "The Zone";
 				next = 'zone1';
 				sound = ['sound/ambient.mp3','sound/ambient.ogg',];
 			break;
@@ -69,7 +64,7 @@ GAME.addScreen('act', (function(){
 				mousePressed = INPUT.addCallback('onmousedown', function (){
 					INPUT.removeCallback('onmousedown', mousePressed);
 					GAME.showScreen(next);
-				});}, 3000);
+				});}, 500);
 		}
 
 	},

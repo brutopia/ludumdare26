@@ -142,6 +142,15 @@ var GAME = (function (width, height) {
 			
 		}
 
+		currentHotspots = [];
+		if(s.hotspots){
+			for(i in s.hotspots){
+				var hs = s.hotspots[i];
+				that.addHotspot(hs, 'hotspot'+i);
+			}
+		
+		}
+
 		// Ready to initialize screen... unless the background is scrolling in
 		if(!scrolling){
 			screenReady(s);
@@ -182,27 +191,6 @@ var GAME = (function (width, height) {
 		if(mouseCallback){
 			mouseCallback = INPUT.removeCallback('onmousedown', mouseCallback);
 		}
-
-		currentHotspots = [];
-		if(s.hotspots){
-			for(i in s.hotspots){
-				var hs = s.hotspots[i];
-				var newDiv = GAME.hudManager.addHud('hotspot'+i, hs.bottom.x-hs.top.x, hs.bottom.y-hs.top.y, hs.top.x, hs.top.y, 'non-clickable');
-				hs.div = newDiv;
-
-				// Wrap value in closure
-				(function(hs){
-					newDiv.onmousedown = function(){ 
-						if(interactive){
-							hs.callback();
-						}
-					}
-				}(hs));
-				currentHotspots.push(hs);
-			}
-		
-		}
-
 	
 		if(GAME.debug){
 			initDebug(s);
@@ -283,6 +271,20 @@ var GAME = (function (width, height) {
 		that.setActive();
 	}
 
+	that.addHotspot = function(hs, id){
+		var newDiv = GAME.hudManager.addHud(id, hs.bottom.x-hs.top.x, hs.bottom.y-hs.top.y, hs.top.x, hs.top.y, 'non-clickable');
+		hs.div = newDiv;
+
+		// Wrap value in closure
+		(function(hs){
+			newDiv.onmousedown = function(){ 
+				if(interactive){
+					hs.callback();
+				}
+			}
+		}(hs));
+		currentHotspots.push(hs);
+	}
 
 	that.setActive = function(){
 		interactive = true;

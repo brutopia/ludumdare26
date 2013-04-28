@@ -34,10 +34,6 @@ GAME.addScreen('zone2', (function(){
 		sprites: ['img/andrei2.png', "img/andrei.png", "img/andrei3.png"],
 		hotspots: [
 
-			{top:{x:840,y:220}, bottom:{x:1024,y:400}, callback: function(){
-				GAME.showDialogue(dialogueLines3);
-			}},
-
 			{top:{x:100,y:320}, bottom:{x:600,y:400}, title:'Exit to the train tracks', callback: function(){
 				GAME.showScreen('zone1');
 			}},
@@ -133,17 +129,26 @@ GAME.addScreen('zone2', (function(){
 
 
 	that.init = function(){
-		if(!GAME.STATE.hasVisitedZone2){
+
+		var andreiHotspot = {top:{x:840,y:220}, bottom:{x:1024,y:400}, callback: function(){
+				GAME.showDialogue(dialogueLines3);
+			}}
+
+		if(!GAME.STATE.hasVisitedZone2 && GAME.STATE.buttonPressed){
 			GAME.STATE.hasVisitedZone2 = true;
 
 			GAME.showDialogue(dialogueLines, "img/andrei2.png", function(){
 				GAME.showDialogue(dialogueLines2, "img/andrei.png", function(){
 					addAndrei();
+					GAME.addHotspot(andreiHotspot, 2134);
 				});
 			});
 		}
 		else{
-			addAndrei();
+			if(GAME.STATE.buttonPressed){
+				addAndrei();
+				GAME.addHotspot(andreiHotspot, 2134);
+			}
 			GAME.setActive();
 		}
 	}
@@ -160,7 +165,9 @@ GAME.addScreen('zone2', (function(){
 	}
 
 	that.exit = function(){
-		GAME.stage.removeChild(charSprite);
+		if(charSprite && GAME.STATE.buttonPressed){
+			GAME.stage.removeChild(charSprite);
+		}
 	}
 
 	function debug(){

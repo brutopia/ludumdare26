@@ -40,7 +40,12 @@ GAME.addScreen('zone3', (function(){
 		sprites: [],
 		hotspots: [
 			{top:{x:525,y:75}, bottom:{x:605,y:250}, title:'Exit through the back door', callback: function(){
-				GAME.showStory(descriptions.door);
+				if(GAME.STATE.doorOpen){
+					GAME.showScreen('zone7');
+				}
+				else{
+					GAME.showStory(descriptions.door);
+				}
 			}},
 			{top:{x:530,y:40}, bottom:{x:610,y:70}, callback: function(){
 				GAME.showStory(descriptions.sign2);
