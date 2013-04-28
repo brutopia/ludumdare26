@@ -5,7 +5,7 @@ GAME.addScreen('prezone1', (function(){
 	var descriptions = {
 			bridge: {	
 				start: {exit:1},
-				1: {line: "This bridge is your only chance of getting into the Zone. It has been kept open as part of outgoing transports for a covert military project. Which is also why you are here today."},
+				1: {line: "This bridge is your only chance of getting into the Zone. It has been kept open as part of outgoing transports for a covert military project. Which is also why you are here today. To your left is the pathway to the train tracks on the bridge.",},
 			},
 
 			city: {	
@@ -20,7 +20,7 @@ GAME.addScreen('prezone1', (function(){
 
 			properGoodbye: {	
 				start: {exit:1},
-				1: {line: "You should probably say your farewells before leaving. God knows when and if you will be back."},
+				1: {line: "You should probably say your farewells. Make sure you've said everything that is important to her before leaving."},
 			},
 		}
 
@@ -28,7 +28,7 @@ GAME.addScreen('prezone1', (function(){
 	that = {
 		title: 'Neo-Stockholm: The DMZ',
 		background: {img:'img/pre-zone1.png', scrollin:'left', title:'The Pre-Zone'},
-		sprites: ['img/inna.png'],
+		sprites: ['img/wife.png'],
 		hotspots: [
 			{top:{x:0,y:0}, bottom:{x:150,y:400}, title:'Exit to the Zone', callback: function(){
 				if(GAME.PLAYER.talkedToWife){
@@ -48,7 +48,7 @@ GAME.addScreen('prezone1', (function(){
 				GAME.showStory(descriptions.water);
 			}},
 			{top:{x:180,y:185}, bottom:{x:325,y:400}, callback: function(){
-				GAME.showDialogue(wifeDialogue, "img/inna.png");
+				GAME.showDialogue(wifeDialogue, "img/wife.png");
 			}},
 		],
 	}

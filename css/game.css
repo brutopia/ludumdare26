@@ -15,12 +15,14 @@
 	cursor: pointer;
 	border-width:1px;
 	border-color:#0f0;
+	border-style:solid;
 }
 
 .non-clickable{
 	cursor: default;
 	border-width:1px;
 	border-color:#f00;
+	border-style:solid;
 }
 
 canvas{
