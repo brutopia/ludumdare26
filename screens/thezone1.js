@@ -23,7 +23,6 @@ GAME.addScreen('zone1', (function(){
 
 
 	that = {
-		title: 'Zone 4312 - Contaminated Area',
 		background: {img:'img/zone1.png'},
 		sprites: [],
 		hotspots: [

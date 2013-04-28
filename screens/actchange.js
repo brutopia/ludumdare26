@@ -7,31 +7,44 @@ GAME.addScreen('act', (function(){
 	var heading, title;
 	var mousePressed;
 	var soundtrack;
+	var h,t,next, sound;
+
+	function startSoundtrack(){
+				soundtrack = new Howl({
+		  				urls: sound,
+		  				loop: true,
+					}).fadeIn(0.5, 5000);
+			}
+
 	that.init = function(){
 		GAME.stage.setBackgroundColor(0x101010);
-
 		heading = GAME.hudManager.addHud('hud-act', GAME.renderer.width-30, 30, 0, 100, 'act');
 		title = GAME.hudManager.addHud('hud-actTitle', GAME.renderer.width-30, 125, 0, 130, 'title');
 
-		var h,t,next, sound;
+		
 		switch(GAME.STATE.act){
 
-			case 2:
+			case 3:
 				h = "";
 				t = "Fin";
 				next = '';
 			break;
+			case 2:
+				h = "Act II";
+				t = "The Zone";
+				next = 'zone7';
+			break;
 
 			case 1:
-				h = "Act I";
+				h = "Entering the Zone";
 				t = "The Stalker";
-				next = 'zone1';
+				next = 'zone5';
 				sound = ['sound/ambient.mp3','sound/ambient.ogg',];
 			break;
 
 			default:
-				h = "Prelude";
-				t = "Enter the Zone";
+				h = "A minimalist adventure";
+				t = "Stalker";
 				next = 'prezone1';
 				sound = ['sound/ambient.mp3','sound/ambient.ogg',];
 			break;
@@ -45,13 +58,7 @@ GAME.addScreen('act', (function(){
 			else{
 				startSoundtrack();
 			}
-
-			function startSoundtrack(){
-				soundtrack = new Howl({
-		  				urls: sound,
-		  				loop: true,
-					}).fadeIn(0.5, 5000);
-			}
+			
 		}
 
 		heading.textContent = heading.innerText = h;

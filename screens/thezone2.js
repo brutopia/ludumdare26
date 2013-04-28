@@ -38,8 +38,12 @@ GAME.addScreen('zone2', (function(){
 				GAME.showDialogue(dialogueLines3);
 			}},
 
-			{top:{x:0,y:320}, bottom:{x:600,y:400}, title:'Exit to the train tracks', callback: function(){
+			{top:{x:100,y:320}, bottom:{x:600,y:400}, title:'Exit to the train tracks', callback: function(){
 				GAME.showScreen('zone1');
+			}},
+
+			{top:{x:0,y:30}, bottom:{x:80,y:400}, title:'Exit to the back entrance', callback: function(){
+				GAME.showScreen('zone3');
 			}},
 
 			{top:{x:220,y:30}, bottom:{x:300,y:100}, callback: function(){
