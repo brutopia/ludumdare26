@@ -13,6 +13,10 @@ GAME.addScreen('zone2', (function(){
 				GAME.showDialogue(dialogueLines3);
 			}},
 
+			{top:{x:0,y:320}, bottom:{x:600,y:400}, title:'Exit to the train tracks', callback: function(){
+				GAME.showScreen('zone1');
+			}},
+
 		],
 	}
 
@@ -44,15 +48,26 @@ GAME.addScreen('zone2', (function(){
 
 
 	that.init = function(){
-		GAME.showDialogue(dialogueLines, "img/andrei2.png", function(){
-			GAME.showDialogue(dialogueLines2, "img/andrei.png", function(){
-				charSprite = PIXI.Sprite.fromImage('img/andrei3.png');
-				charSprite.anchor.x = charSprite.anchor.y = 1.0;
-				charSprite.position.x = 1024;
-				charSprite.position.y =  400;
-				GAME.stage.addChild(charSprite);
+		if(!GAME.STATE.hasVisitedZone2){
+			GAME.STATE.hasVisitedZone2 = true;
+
+			GAME.showDialogue(dialogueLines, "img/andrei2.png", function(){
+				GAME.showDialogue(dialogueLines2, "img/andrei.png", function(){
+					addAndrei();
+				});
 			});
-		});
+		}
+		else{
+			addAndrei();
+		}
+	}
+
+	function addAndrei(){
+		charSprite = PIXI.Sprite.fromImage('img/andrei3.png');
+		charSprite.anchor.x = charSprite.anchor.y = 1.0;
+		charSprite.position.x = 1024;
+		charSprite.position.y =  400;
+		GAME.stage.addChild(charSprite);
 	}
 
 	that.animate = function(){

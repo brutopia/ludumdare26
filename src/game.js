@@ -50,6 +50,7 @@ var GAME = (function (width, height) {
 		try{
 			if(window.localStorage){
 				localStorage.setItem("game", JSON.stringify(that.STATE));
+				localStorage.setItem("player", JSON.stringify(that.PLAYER));
 			}
 		}
 		catch(e){
@@ -60,12 +61,14 @@ var GAME = (function (width, height) {
 	that.load = function(){
 		try{
 			if(window.localStorage){
-				 var gameState = JSON.parse(localStorage.getItem("game"));
+				var gameState = JSON.parse(localStorage.getItem("game"));
+				var playerState = JSON.parse(localStorage.getItem("player"));
 				 
 				if(gameState){
 					var r = confirm("Found a saved state. Would you like to continue your previous game?");
 					if(r){
 						that.STATE = gameState;
+						that.PLAYER = playerState || {knows:{}};
 					}
 				}
 				 
@@ -184,7 +187,7 @@ var GAME = (function (width, height) {
 		if(s.hotspots){
 			for(i in s.hotspots){
 				var hs = s.hotspots[i];
-				var newDiv = GAME.hudManager.addHud('hotspot'+i, hs.bottom.x-hs.top.x, hs.bottom.y-hs.top.y, hs.top.x, hs.top.y, '');
+				var newDiv = GAME.hudManager.addHud('hotspot'+i, hs.bottom.x-hs.top.x, hs.bottom.y-hs.top.y, hs.top.x, hs.top.y, 'non-clickable');
 				hs.div = newDiv;
 
 				// Wrap value in closure

@@ -51,7 +51,13 @@ GAME.addScreen('zone1', (function(){
 
 
 	that.init = function(){
-		GAME.showStory(storyLines, function(){});
+		if(!GAME.STATE.hasVisitedZone1){
+			GAME.STATE.hasVisitedZone1 = true;
+			GAME.showStory(storyLines, function(){});
+		}
+		else{
+			GAME.setActive();
+		}
 	}
 
 	that.animate = function(){
