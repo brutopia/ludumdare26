@@ -10,12 +10,14 @@ var GAME = (function (width, height) {
 	var datGui;
 	var story, storyDiv, rootHudDiv;
 	var currentHotspots;
+	var charSprite;
 
 	that.stage = new PIXI.Stage(0x00ff00);
 	that.renderer = PIXI.autoDetectRenderer(width, height);
 	that.debug = false;
 	that.hudManager;
 	that.STATE = {act:0,};
+	that.PLAYER = {knows:{},};
 	
 
 	function initDebug(s){
@@ -211,6 +213,46 @@ var GAME = (function (width, height) {
 		if(s.init){
 			s.init();
 		}
+	}
+
+
+	that.showDialogue = function(lines, characterImage, callback){
+		var characterDiv = GAME.hudManager.addHud('hud-character', 600, 80, 70, 255 , 'options');
+		characterDiv.style.display = 'none';
+		characterDiv.height = 'auto';
+
+		var dialogueDiv = GAME.hudManager.addHud('hud-dialogue', 400,60, 270, 120 , 'dialogue');
+		dialogueDiv.style.display = 'none';
+		dialogueDiv.height = 'auto';
+
+		story = new Dialogue(lines,dialogueDiv,characterDiv);
+
+		charSprite = PIXI.Sprite.fromImage(characterImage);
+		charSprite.anchor.x = charSprite.anchor.y = 1.0;
+		charSprite.position.x = 990;
+		charSprite.position.y =  340;
+		GAME.stage.addChild(charSprite);
+
+		that.setInactive();
+		story.play(function(){
+			dialogueFinished();
+			if(callback){
+				try{
+					callback();
+				}catch(e){
+					console.log(e);
+				}
+			}
+		});
+	}
+
+	function dialogueFinished(){
+		console.log("dialogue finished");
+		GAME.stage.removeChild(charSprite);
+		charSprite = null;
+		GAME.hudManager.removeHud('hud-character');
+		GAME.hudManager.removeHud('hud-dialogue');
+		that.setActive();
 	}
 
 	that.showStory = function(lines, callback){

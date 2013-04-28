@@ -15,10 +15,12 @@ function Dialogue(d, div, optsDiv){
 
 	function forward(){
 		waiting = false;
-
-		div.style.display = "block";
+		
+		div.style.display = "none";
+		optsDiv.style.display = "none";
 		div.innerHTML = '';
-	
+		optsDiv.innerHTML = '';
+
 		if(current){
 			
 			// If there is a pre-function
@@ -35,7 +37,6 @@ function Dialogue(d, div, optsDiv){
 			if(typeof current.line === 'string'){
 				var x = document.getElementById(current.div) || div;
 				say(current.line, x);
-				
 			}
 	
 			// If there are answer options
@@ -68,15 +69,11 @@ function Dialogue(d, div, optsDiv){
 	}
 
 	function say(line, x){
-		div.style.display = "none";
-		optsDiv.style.display = "none";
-
 		x.style.display = "block";
 		x.textContent = x.innerText = current.line;
 	}
 
 	function writeOptions(dialogue, options){
-		optsDiv.innerHTML = '';
 		optsDiv.style.display = "block";
 
 		for(var i=0;i<options.length;i++){
