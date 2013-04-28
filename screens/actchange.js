@@ -29,16 +29,18 @@ GAME.addScreen('act', (function(){
 				next = 'screen2';
 			break;
 
-			case 0:
-				h = "Prelude";
-				t = "Enter the Zone";
-				next = 'prezone1';
+			case 1:
+				h = "Act I";
+				t = "The Stalker";
+				next = 'zone1';
+				sound = ['sound/ambient.mp3','sound/ambient.ogg',];
 			break;
 
 			default:
-				h = "Act I";
-				t = "The Stalker";
-				next = 'prezone2';
+				h = "Prelude";
+				t = "Enter the Zone";
+				next = 'prezone1';
+				sound = ['sound/ambient.mp3','sound/ambient.ogg',];
 			break;
 		}
 		

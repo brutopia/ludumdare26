@@ -13,14 +13,12 @@
 
 .clickable{
 	cursor: pointer;
-	border-style:solid;
 	border-width:1px;
 	border-color:#0f0;
 }
 
 .non-clickable{
 	cursor: default;
-	border-style:solid;
 	border-width:1px;
 	border-color:#f00;
 }
