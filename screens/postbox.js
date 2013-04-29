@@ -7,7 +7,7 @@ GAME.addScreen('postbox', (function(){
 							5: {line: "It's not real you know. None of it is.", exit:6, div: 'hud-dialogue'},
 							6: {line: "I am not. Mika is not. That boat of ours is not. We don't own a beautiful house together.", exit:7, div: 'hud-dialogue'},
 							7: {line: "It's not real.", exit:8, div: 'hud-dialogue'},
-							8: {line: "Not even that room is real. You dream of it giving you salvation. That's why you keep it locked in your mind,", div: 'hud-dialogue'},
+							8: {line: "Not even that room is real. You dream of it giving you salvation. That's why you keep it locked in your mind,", exit:9, div: 'hud-dialogue'},
 							9: {line: "You're afraid that it will lead you to what you really came here for...", div: 'hud-dialogue', pre:function(){GAME.PLAYER.knows.aboutZoneRealityField=true;}},
 						
 				};
