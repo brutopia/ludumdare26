@@ -20,7 +20,7 @@ GAME.addScreen('prezone1', (function(){
 
 			properGoodbye: {	
 				start: {exit:1},
-				1: {line: "You should probably say your farewells. Make sure you've said everything that is important to her before leaving."},
+				1: {line: "You should probably say your farewells. Make sure you've said everything that is important to her before leaving. Perhaps even look around a bit by clicking the background."},
 			},
 		}
 
@@ -60,32 +60,47 @@ GAME.addScreen('prezone1', (function(){
 				};
 
 
-	var wifeLines = {	
-				start:  {line: 'Be careful out there.', exit:1},
-					1:  {line: 'Please...', exit:2},
-					2:  {line: 'come back alive.'},
-				};
-
-	var wifeDialogue = {	start: {exit:1},
-							1: {line: "I'm so worried", exit:10, div: 'hud-dialogue'},
-						10: {options:[11,12,13,14], div: 'hud-character'},
+	var wifeDialogue = {
+						start: {exit:1},
+						1: {line: 'Be careful out there.', exit:2},
+						2: {line: 'Please...', exit:3},
+						3: {line: 'come back alive.', exit:4},
+						4: {options:[41,42,43], div: 'hud-character'},
+							41: {line:"Comfort her", div: 'hud-character', exit:411},
+								411: {line:"Don't worry honey. It will be fine. I'll be back before you know it", div: 'hud-character', exit:5},
+							
+							42: {line:"Tell her to stay strong", div: 'hud-character', exit:421},
+								421: {line:"Stop that. I've done this tons of times before. ", div: 'hud-character', exit:5},
+							
+							43: {line:"Be cold", div: 'hud-character', exit:431},
+								431: {line:"I'll survive.", div: 'hud-character', exit:5},
 						
-						11: {line:'Ask about last night', exit:111, condition: function(){return !GAME.PLAYER.knows.lastNight}, div: 'hud-character'},
-							111: {line:'What about it?', options:[1111,1112], div: 'hud-dialogue'},
-						1111: {line:'Nevermind...', div: 'hud-character', exit:10},
-						1112: {line:'Apologize', div: 'hud-character', exit:11112},
-							11112: {line:"It's ok. I know it wasn't your fault.", div: 'hud-dialogue', exit:10, pre:function(){GAME.PLAYER.knows.lastNight=true;}},
+						5: {options:[52,53,51,54], div: 'hud-character'},
 
-						12: {line:'Ask about daughter', exit:121, div: 'hud-character', condition:function(){return GAME.PLAYER.knows.lastNight}},
-							121: {line:'Mika is sick. She needs you.', exit:10, div: 'hud-dialogue', pre:function(){GAME.PLAYER.talkedToWife=true}},
+							51: {line:"Tell her you have to leave for the Zone", div: 'hud-character', exit:511, condition:function(){return !GAME.PLAYER.jobExplain}},
+								511: {line:"I have to finish this last job. It will bring in the big bucks, and we can repair that boat of ours.", div: 'hud-character', exit:512},
+								512: {line:"Just think about it - you, me and Mika, out in the unpolluted water on a beautiful summer day.", div: 'hud-character', exit:513},
+								513: {line:"You say that every time...", div: 'hud-dialogue', exit:514},
+								514: {line:"and yet there always seems to be one last job to be done.", div: 'hud-dialogue', exit:515},
+								515: {line:"Aren't all your stalker friends upset with you stealing all their work from them?", div: 'hud-dialogue', pre:function(){GAME.PLAYER.jobExplain=true;}, exit:5},
 
-						13: {line:'Ask about the Zone', exit:131, div: 'hud-character'},
-							131: {line:'Last time you went in there, you came back with nothing.', exit:132, div:'hud-dialogue'},
-							132: {line:"I wouldn't let you go in there if it wasn't for Mika. She really needs you now. Don't fail her.", exit:10, div: 'hud-dialogue'},
-						
-						14: {line:'Leave for the Zone', div: 'hud-character'},
+							52: {line:"Ask her how your daughter is", div: 'hud-character', exit:521},
+								521: {line:"How is Mika doing her first year in school?", div: 'hud-character', exit:522},
+								522: {line:"It seems like forever since I saw her. All this work is killing me.", div: 'hud-character', exit:523},
+								523: {line:"Mika is fine.", div: 'hud-dialogue', exit:524},
+								524: {line:"She asks for her dad alot though...", div: 'hud-dialogue', exit:5},
 
-					31: {line: 'Your wife gets annoyed with you and turns away.'},
+							53: {line:"Explain why this job is different", div: 'hud-character', exit:531, condition:function(){return GAME.PLAYER.jobExplain}},
+								531: {line:"Boris tells me that the military has left The room wide open. Only Andrei is standing guard.", div: 'hud-character', exit:532},
+								532: {line:"And he will look the other way if you bribe him with as much as a pack of cigarettes.", div: 'hud-character', exit:533},
+								533: {line:"Or at the very least some non-syntetic meat.", div: 'hud-character', exit:534},
+								534: {line:"If you say so...", div: 'hud-dialogue', exit:5, pre:function(){GAME.PLAYER.talkedToWife=true;}},
+
+							54: {line:"Leave", div: 'hud-character', exit:541, condition:function(){return GAME.PLAYER.talkedToWife}},
+								541: {line:"I guess I'll be going then...", div: 'hud-character', exit:542},
+								541: {line:"Be careful out there.", div: 'hud-dialogue'},
+
+
 				};
 
 

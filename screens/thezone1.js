@@ -54,7 +54,7 @@ GAME.addScreen('zone1', (function(){
 			}},
 
 			{top:{x:250,y:150}, bottom:{x:350,y:330}, title:'Exit to water', callback: function(){
-				if(GAME.PLAYER.hasReadLetter){
+				if(GAME.PLAYER.knows.aboutBoat){
 					GAME.showScreen('zone5');
 				}
 				else{
@@ -66,8 +66,10 @@ GAME.addScreen('zone1', (function(){
 
 
 	var storyLines = {	
-				start:  {line: 'Your ride in on the train was far from comfortable. It was undercover though.', exit:1},
-					1:  {line: 'These old train tracks are being used for transporting artefacts out of the zone. The military must have gotten information from the Institute about something important.'},
+				start:  {line: "You step off the freight train where you've kept hidden for what feels like forever.", exit:1},
+					1:  {line: "The sleep you got cannot be described as a good night's worth. In fact, the Zone makes one's dreams vivid and long lasting so waking up is always somewhat troubling.", exit:2},
+					2:  {line: "Now that you finally are here, it won't be long until you get what you want and can leave this horrid place for good.", exit:3},
+					3:  {line: "Conveniently located to your right is the military complex."},
 				};
 
 

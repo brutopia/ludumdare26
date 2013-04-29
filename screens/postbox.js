@@ -2,10 +2,13 @@ GAME.addScreen('postbox', (function(){
 	var wifeDialogue = {	start: {exit:1},
 							1: {line: "I'm so worried", exit:2, div: 'hud-dialogue'},
 							2: {line: "You have changed since you started going to the Zone.", exit:3, div: 'hud-dialogue'},
-							3: {line: "It's not worth it. We can find another way to pay for my treatments.", exit:4, div: 'hud-dialogue'},
-							4: {line: "Please stay...", exit:4, div: 'hud-dialogue', exit:5},
-							5: {line: "... I promise I won't fail you again.", exit:6, div: 'hud-dialogue'},
-							6: {line: "... I promise I won't have another miscarriage.", div: 'hud-dialogue', pre:function(){GAME.PLAYER.hasReadLetter=true;}},
+							3: {line: "It's not worth it. You can be happy without it. And without me.", exit:4, div: 'hud-dialogue'},
+							4: {line: "What kind of pleasure do you get from going here?", div: 'hud-dialogue', exit:5},
+							5: {line: "It's not real you know. None of it is.", exit:6, div: 'hud-dialogue'},
+							6: {line: "I am not. Mika is not. That boat of ours is not. We don't own a beautiful house together.", exit:7, div: 'hud-dialogue'},
+							7: {line: "It's not real.", exit:8, div: 'hud-dialogue'},
+							8: {line: "Not even that room is real. You dream of it giving you salvation. That's why you keep it locked in your mind,", div: 'hud-dialogue'},
+							9: {line: "You're afraid that it will lead you to what you really came here for...", div: 'hud-dialogue', pre:function(){GAME.PLAYER.knows.aboutZoneRealityField=true;}},
 						
 				};
 
@@ -19,13 +22,14 @@ GAME.addScreen('postbox', (function(){
 				start: {exit:1},
 				1: {line: "There is a blank sheet of paper inside.", options:[2,3]},
 				2: {line: "Put it back.", exit:21},
-					21: {line: "This is absurd."},
-				3: {line: "Read it anyway", exit:31},
+					21: {line: "This is absurd. Who would leave a blank piece of paper in an empty mailbox that hasn't been used for years? Located in an infected Zone!"},
+				3: {line: "Read it anyway", exit:31, condition:function(){return GAME.PLAYER.knows.aboutTheLetterInThePostbox;}},
 					31: {line: "You stare at the letter", exit:32, pre:function(){GAME.PLAYER.readsLetter=true;}},
 					32: {line: "...", exit:33},
 					33: {line: "You can see it now.", exit:34},
 					34: {line: "It's a letter from your wife.", exit:35},
-					35: {line: "Your dead wife..."},
+					35: {line: "Your dead wife...", exit:36},
+					36: {line: "Or did you ever have a wife?"},
 			},
 
 			button: {	

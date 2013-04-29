@@ -40,7 +40,7 @@ GAME.addScreen('zone3', (function(){
 		sprites: [],
 		hotspots: [
 			{top:{x:525,y:75}, bottom:{x:605,y:250}, title:'Exit through the back door', callback: function(){
-				if(GAME.STATE.doorOpen){
+				if(GAME.PLAYER.knows.aboutZoneRealityField){
 					GAME.showScreen('zone7');
 				}
 				else{
