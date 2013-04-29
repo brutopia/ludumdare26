@@ -14,14 +14,18 @@ GAME.addScreen('zone7', (function(){
 
 
 	var storyLines = {	
-				start:  {line: "You decend down the dark staircase.", exit:1},
-				1:  {line: "The artefact you've been looking for is near at hand.", exit:2},
-				2:  {line: "Your wife is dead.", exit:3},
-				3:  {line: "Mika is dead.", exit:4},
-				4:  {line: "At the end of these steps you will find what makes it all worth it.", exit:5},
+				start:  {line: "The dark staircase lies in front of you...", options:[1,2]},
+				1: {line: "Descend", exit:5},
+				2: {line: "Turn around", exit:6},
+
 				5:  {pre:function(){
-					setTimeout( function(){GAME.showScreen('house');}, 5000);
+					function(){GAME.showScreen('house');
 				}},
+
+				6:  {pre:function(){
+					function(){GAME.STATE.act=2; GAME.showScreen('act');}
+				}},
+
 				};
 
 
