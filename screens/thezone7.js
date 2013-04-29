@@ -18,13 +18,9 @@ GAME.addScreen('zone7', (function(){
 				1: {line: "Descend", exit:5},
 				2: {line: "Turn around", exit:6},
 
-				5:  {pre:function(){
-					function(){GAME.showScreen('house');
-				}},
+				5:  {pre:function(){GAME.showScreen('house');}},
 
-				6:  {pre:function(){
-					function(){GAME.STATE.act=2; GAME.showScreen('act');}
-				}},
+				6:  {pre:function(){GAME.STATE.act=2; GAME.showScreen('act');}},
 
 				};
 
