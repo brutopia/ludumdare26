@@ -23,10 +23,7 @@ GAME.addScreen('house', (function(){
 
 
 	that.init = function(){
-		GAME.showStory(storyLines, function(){
-			GAME.STATE.act=2;
-			GAME.showScreen('act');
-		});
+		GAME.showStory(storyLines, function(){GAME.STATE.act=2;	GAME.showScreen('act');	});
 	}
 
 	that.animate = function(){

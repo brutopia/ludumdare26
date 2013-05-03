@@ -47,23 +47,23 @@ GAME.addScreen('zone3', (function(){
 					GAME.showStory(descriptions.door);
 				}
 			}},
-			{top:{x:530,y:40}, bottom:{x:610,y:70}, callback: function(){
+			{top:{x:530,y:40}, bottom:{x:610,y:70}, title:'Read Sign', callback: function(){
 				GAME.showStory(descriptions.sign2);
 			}},
-			{top:{x:760,y:190}, bottom:{x:790,y:215}, callback: function(){
+			{top:{x:760,y:190}, bottom:{x:790,y:215}, title:'Read Sign', callback: function(){
 				GAME.showStory(descriptions.sign3);
 			}},
 
-			{top:{x:630,y:185}, bottom:{x:690,y:210}, callback: function(){
+			{top:{x:630,y:185}, bottom:{x:690,y:210}, title:'Read Sign', callback: function(){
 				GAME.showStory(descriptions.sign1);
 			}},
-			{top:{x:750,y:75}, bottom:{x:875,y:140}, callback: function(){
+			{top:{x:750,y:75}, bottom:{x:875,y:140}, title:'Look at Windows', callback: function(){
 				GAME.showStory(descriptions.windows);
 			}},
 			{top:{x:950,y:120}, bottom:{x:1024,y:400}, title: 'Exit to front gate', callback: function(){
 				GAME.showScreen('zone2');
 			}},
-			{top:{x:900,y:198}, bottom:{x:917,y:223}, callback: function(){
+			{top:{x:900,y:198}, bottom:{x:917,y:223}, title:'Look at Item', callback: function(){
 				GAME.showStory(descriptions.postbox, function(){GAME.showScreen('postbox');});
 			}},
 

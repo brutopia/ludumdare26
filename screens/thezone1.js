@@ -41,19 +41,19 @@ GAME.addScreen('zone1', (function(){
 				}
 			}},
 			
-			{top:{x:375,y:50}, bottom:{x:585,y:340}, callback: function(){
+			{top:{x:375,y:50}, bottom:{x:585,y:340}, title:'Look at Train Cart', callback: function(){
 				GAME.showStory(descriptions.train);
 			}},
 
-			{top:{x:0,y:160}, bottom:{x:170,y:220}, callback: function(){
+			{top:{x:0,y:160}, bottom:{x:170,y:220}, title:'Look at City', callback: function(){
 				GAME.showStory(descriptions.city);
 			}},
 
-			{top:{x:0,y:230}, bottom:{x:200,y:320}, callback: function(){
+			{top:{x:0,y:230}, bottom:{x:200,y:320}, title:'Look at Water', callback: function(){
 				GAME.showStory(descriptions.water);
 			}},
 
-			{top:{x:250,y:150}, bottom:{x:350,y:330}, title:'Exit to water', callback: function(){
+			{top:{x:250,y:150}, bottom:{x:350,y:330}, title:'Exit to Waterfront', callback: function(){
 				if(GAME.PLAYER.knows.aboutBoat){
 					GAME.showScreen('zone5');
 				}

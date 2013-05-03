@@ -37,16 +37,16 @@ GAME.addScreen('prezone1', (function(){
 					GAME.showStory(descriptions.properGoodbye);
 				}
 			}},
-			{top:{x:500,y:60}, bottom:{x:900,y:260}, callback: function(){
+			{top:{x:500,y:60}, bottom:{x:900,y:260}, title:'Look at Bridge', callback: function(){
 				GAME.showStory(descriptions.bridge);
 			}},
-			{top:{x:920,y:220}, bottom:{x:1024,y:270}, callback: function(){
+			{top:{x:920,y:220}, bottom:{x:1024,y:270}, title:'Look at City', callback: function(){
 				GAME.showStory(descriptions.city);
 			}},
-			{top:{x:720,y:280}, bottom:{x:1024,y:380}, callback: function(){
+			{top:{x:720,y:280}, bottom:{x:1024,y:380}, title:'Look at Water', callback: function(){
 				GAME.showStory(descriptions.water);
 			}},
-			{top:{x:180,y:185}, bottom:{x:325,y:400}, callback: function(){
+			{top:{x:180,y:185}, bottom:{x:325,y:400}, title:'Talk to Wife', callback: function(){
 				GAME.showDialogue(wifeDialogue, "img/wife.png");
 			}},
 		],

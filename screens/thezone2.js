@@ -42,27 +42,27 @@ GAME.addScreen('zone2', (function(){
 				GAME.showScreen('zone3');
 			}},
 
-			{top:{x:220,y:30}, bottom:{x:300,y:100}, callback: function(){
+			{top:{x:220,y:30}, bottom:{x:300,y:100}, title:'Look at Turret', callback: function(){
 				GAME.showStory(descriptions.turret);
 			}},
 
-			{top:{x:340,y:130}, bottom:{x:380,y:160}, callback: function(){
+			{top:{x:340,y:130}, bottom:{x:380,y:160}, title:'Look at Security Camera', callback: function(){
 				GAME.showStory(descriptions.camera);
 			}},
 
-			{top:{x:500,y:70}, bottom:{x:570,y:120}, callback: function(){
+			{top:{x:500,y:70}, bottom:{x:570,y:120}, title:'Look at Security Camera', callback: function(){
 				GAME.showStory(descriptions.camera);
 			}},
 
-			{top:{x:750,y:80}, bottom:{x:820,y:310}, callback: function(){
+			{top:{x:750,y:80}, bottom:{x:820,y:310}, title:'Look at Booth', callback: function(){
 				GAME.showStory(descriptions.booth);
 			}},
 
-			{top:{x:100,y:190}, bottom:{x:330,y:290}, callback: function(){
+			{top:{x:100,y:190}, bottom:{x:330,y:290}, title:'Look at Gate', callback: function(){
 				GAME.showStory(descriptions.gates);
 			}},
 
-			{top:{x:430,y:160}, bottom:{x:530,y:260}, callback: function(){
+			{top:{x:430,y:160}, bottom:{x:530,y:260}, title:'Look outisde', callback: function(){
 				GAME.showStory(descriptions.backdrop);
 			}},
 
@@ -129,7 +129,7 @@ GAME.addScreen('zone2', (function(){
 
 	that.init = function(){
 
-		var andreiHotspot = {top:{x:840,y:220}, bottom:{x:1024,y:400}, callback: function(){
+		var andreiHotspot = {top:{x:840,y:220}, bottom:{x:1024,y:400}, title:'Talk to Andrei', callback: function(){
 				GAME.showDialogue(dialogueLines3);
 			}}
 

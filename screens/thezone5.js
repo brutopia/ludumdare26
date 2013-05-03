@@ -13,15 +13,15 @@ GAME.addScreen('zone5', (function(){
 		background: {img:'img/zone5.png'},
 		sprites: [],
 		hotspots: [
-			{top:{x:800,y:185}, bottom:{x:855,y:225}, callback: function(){
+			{top:{x:800,y:185}, bottom:{x:855,y:225}, title:'Look at Artifacts', callback: function(){
 				GAME.showScreen('eggs');
 			}},
 
-			{top:{x:200,y:180}, bottom:{x:310,y:220}, callback: function(){
+			{top:{x:200,y:180}, bottom:{x:310,y:220}, title:'Look at Boat', callback: function(){
 				GAME.showScreen('boat');
 			}},
 
-			{top:{x:530,y:150}, bottom:{x:600,y:275}, callback: function(){
+			{top:{x:530,y:150}, bottom:{x:600,y:275}, title:'Look at Tree', callback: function(){
 				GAME.showStory(descriptions.tree);
 			}},
 

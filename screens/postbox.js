@@ -48,11 +48,11 @@ GAME.addScreen('postbox', (function(){
 		background: {img:'img/postbox.png'},
 		sprites: [],
 		hotspots: [
-			{top:{x:530,y:180}, bottom:{x:610,y:194}, callback: function(){
+			{top:{x:530,y:180}, bottom:{x:610,y:194}, title:'Read Sign', callback: function(){
 				GAME.showStory(descriptions.sign);
 			}},
 
-			{top:{x:485,y:105}, bottom:{x:627,y:162}, callback: function(){
+			{top:{x:485,y:105}, bottom:{x:627,y:162}, title:'Look Inside', callback: function(){
 				GAME.showStory(descriptions.letter, function(){
 					if(GAME.PLAYER.readsLetter){
 						GAME.showDialogue(wifeDialogue, "img/wife.png");
@@ -61,7 +61,7 @@ GAME.addScreen('postbox', (function(){
 				});
 			}},
 
-			{top:{x:380,y:148}, bottom:{x:415,y:178}, callback: function(){
+			{top:{x:380,y:148}, bottom:{x:415,y:178}, title:'Look at Button', callback: function(){
 				GAME.showStory(descriptions.button);
 			}},
 			{top:{x:0,y:260}, bottom:{x:1024,y:400}, title: 'Exit to back entrance', callback: function(){
