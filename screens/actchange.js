@@ -27,7 +27,8 @@ GAME.addScreen('act', (function(){
 			case 2:
 				h = "";
 				t = "Fin";
-				next = '';
+				next = undefined;
+				sound = undefined;
 			break;
 
 			case 1:
