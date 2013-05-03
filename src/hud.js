@@ -16,15 +16,22 @@ function HUD(rootElement){
 	
 
 	that.addHud = function(id, width, height, x, y, cssClass){
-		if(!id || !width || !height || x === undefined || y === undefined){
+		if(!id ||  x === undefined || y === undefined){
 			throw "Missing arguments";
 		}
 
 		var div = document.createElement('div');
 		div.id = id;
 		div.style.position = "absolute";
-		div.style.height = height + "px";
-		div.style.width = width + "px";
+
+		if(height){
+			div.style.height = height + "px";
+		}
+
+		if(width){
+			div.style.width = width + "px";
+		}
+		
 		div.style.left =  x + "px" || that.defaultPosition.x;
 		div.style.top = y + "px" || that.defaultPosition.y;
 		div.className = cssClass;

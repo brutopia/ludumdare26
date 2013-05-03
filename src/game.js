@@ -208,13 +208,11 @@ var GAME = (function (width, height) {
 
 
 	that.showDialogue = function(lines, characterImage, callback){
-		var characterDiv = GAME.hudManager.addHud('hud-character', 600, 80, 70, 255 , 'options');
+		var characterDiv = GAME.hudManager.addHud('hud-character', 600, undefined, 70, 245 , 'options');
 		characterDiv.style.display = 'none';
-		characterDiv.height = 'auto';
 
-		var dialogueDiv = GAME.hudManager.addHud('hud-dialogue', 400,60, 270, 120 , 'dialogue');
+		var dialogueDiv = GAME.hudManager.addHud('hud-dialogue', 400, undefined, 270, 120 , 'dialogue');
 		dialogueDiv.style.display = 'none';
-		dialogueDiv.height = 'auto';
 
 		story = new Dialogue(lines,dialogueDiv,characterDiv);
 
